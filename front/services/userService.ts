@@ -14,8 +14,9 @@ class UserService {
     }
 
     public async getUsers(): Promise<User[]> {
+        console.log("getUsers");
         return await apiRequest(`user`);
     }
 }
 
-export default UserService;
+export default new UserService();

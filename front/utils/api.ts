@@ -1,7 +1,7 @@
 // utils/api.ts
 
 export async function apiRequest(url: string, options: RequestInit = {}): Promise<any> {
-    const fullUrl = 'http://localhost:3001/' + url;
+    const fullUrl = 'http://localhost:3001/api/' + url;
 
     try {
         const response = await fetch(fullUrl, {

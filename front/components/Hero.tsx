@@ -1,6 +1,34 @@
 "use client";
 
+import UserService from "@/services/userService";
+import { useState } from "react";
+
 const Hero = () => {
+  const [user, setUser] = useState<User>({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!user.name || !user.email || !user.phone) {
+      return;
+    }
+    try {
+      console.log("New user:", e);
+      const newUser = await UserService.createUser(user);
+      setUser({ id: "", name: "", email: "", phone: "" });
+      console.log("New user:", newUser);
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
+  };
+
   return (
     <main className="container mx-auto px-4 py-8 md:pt-24 flex flex-col justify-start items-center  min-h-screen ">
       <h1 className="lg:text-5xl text-4xl max-w-2xl font-bold text-center mb-8">
@@ -14,25 +42,29 @@ const Hero = () => {
           </span>
         </div>
 
-        <form className="pt-6">
+        <form onSubmit={handleSubmit} className="pt-6">
           <div className="flex justify-center gap-3">
             <div className="mb-4 ">
               <label htmlFor="name" className="block text-sm font-medium mb-2">
                 Name
               </label>
               <input
+                value={user.name}
+                onChange={handleChange}
                 type="name"
                 id="name"
                 className="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-600"
               />
             </div>
             <div className="mb-4 ">
-              <label htmlFor="name" className="block text-sm font-medium mb-2">
-                Name
+              <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                Phone number
               </label>
               <input
-                type="name"
-                id="name"
+                value={user.phone}
+                onChange={handleChange}
+                type="phone"
+                id="phone"
                 className="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-600"
               />
             </div>
@@ -42,42 +74,22 @@ const Hero = () => {
               Adresse email
             </label>
             <input
+              value={user.email}
+              onChange={handleChange}
               type="email"
               id="email"
               className="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-600"
             />
           </div>
+          <button className="w-full bg-purple-600 text-white py-2 rounded-lg font-medium">
+            Submit
+          </button>
         </form>
-
-        <button className="w-full bg-purple-600 text-white py-2 rounded-lg font-medium">
-          Submit
-        </button>
 
         <p className="text-center text-sm text-gray-600 mt-4">
           J'ai déjà fait ce test d'éligibilité →
         </p>
       </div>
-      {/* 
-      <div className="grid md:grid-cols-3 gap-8 mt-12">
-        <div>
-          <h3 className="font-bold mb-2">Simple et intuitif</h3>
-          <p className="text-gray-600">
-            Déposez votre dossier en 10 minutes et une réponse sous 24 heures.
-          </p>
-        </div>
-        <div>
-          <h3 className="font-bold mb-2">Sécurisé</h3>
-          <p className="text-gray-600">
-            Vos données sont cryptées et ne sont jamais partagées.
-          </p>
-        </div>
-        <div>
-          <h3 className="font-bold mb-2">Sans engagement</h3>
-          <p className="text-gray-600">
-            Aucune obligation avant que votre contrat ne soit signé.
-          </p>
-        </div>
-      </div> */}
     </main>
   );
 };

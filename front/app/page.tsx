@@ -3,9 +3,7 @@ import Hero from "@/components/Hero";
 
 export default function Home() {
   return (
-    <main
-      className="bg-[#F4F4F4"
-    >
+    <main className="bg-[#F4F4F4">
       <div className="border-">
         <Header />
       </div>
