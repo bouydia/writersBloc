@@ -53,6 +53,7 @@ const Hero = () => {
                 onChange={handleChange}
                 type="name"
                 id="name"
+                name="name"
                 className="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-600"
               />
             </div>
@@ -65,6 +66,7 @@ const Hero = () => {
                 onChange={handleChange}
                 type="phone"
                 id="phone"
+                name="phone"
                 className="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-600"
               />
             </div>
@@ -78,6 +80,7 @@ const Hero = () => {
               onChange={handleChange}
               type="email"
               id="email"
+              name="email"
               className="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-600"
             />
           </div>
