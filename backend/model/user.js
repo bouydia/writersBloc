@@ -26,7 +26,12 @@ const UserSchema = new Schema(
   },
   {
     timestamp: true,
-    toJSON: { virtuals: true },
+    toJSON: {
+      virtuals: true,
+      transform: function (doc, ret) {
+        delete ret.id
+      },
+    },
     toObject: { virtuals: true },
   }
 )
