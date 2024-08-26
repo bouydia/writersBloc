@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 const asyncHandler = require('express-async-handler')
 const { validateUser, User } = require('../model/user')
 
@@ -20,4 +19,9 @@ module.exports.registerUser = asyncHandler(async (req, res) => {
    res
      .status(201)
      .json({ message: 'your registered successfylly in the whiteList' })
+})
+
+module.exports.getAllUsers = asyncHandler(async (req, res) => {
+  const users = await User.find()
+  return res.json({ users})
 })

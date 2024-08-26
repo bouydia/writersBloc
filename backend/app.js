@@ -2,6 +2,7 @@ const express = require('express')
 require('dotenv').config()
 const connectDB = require('./config/connectDB')
 const cors = require('cors')
+const { errorHandler, notFound } = require('./middleware/error')
 
 // Init the app
 const app = express()
@@ -21,7 +22,8 @@ app.use('/api/user', require('./routes/userRoute'))
 
 
 // Error Handler Middleware
-app
+app.use(notFound)
+app.use(errorHandler)
 
 // Running the server
 const port = process.env.PORT || 4001
