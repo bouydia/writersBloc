@@ -23,5 +23,5 @@ module.exports.registerUser = asyncHandler(async (req, res) => {
 
 module.exports.getAllUsers = asyncHandler(async (req, res) => {
   const users = await User.find()
-  return res.json({ users})
+  return res.json(users)
 })
